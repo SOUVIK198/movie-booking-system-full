@@ -125,6 +125,11 @@ This prevents multiple users from booking the same seat simultaneously.
 * Supertest
 * MongoDB Memory Server
 
+
+## Caching
+* Redis
+
+
 ---
 
 # 📁 Project Structure
@@ -151,6 +156,50 @@ movie-booking-system
 ```
 
 ---
+## 🏗 Architecture
+
+```text
+Client
+   │
+   ▼
+Express API
+   │
+ ┌─┴─────────────┐
+ ▼               ▼
+Redis Cache   MongoDB
+   │
+   ▼
+Fast Reads & Seat Locks
+```
+
+## 🚀 Redis Caching
+
+Redis is used to improve performance by reducing unnecessary database queries.
+
+### Cached Data
+
+- Movie Listings
+- Movie Details
+- Theatre Listings
+- Show Listings
+- Dashboard Statistics
+
+### Cache Invalidation
+
+Cache is automatically cleared whenever:
+
+- A movie is added
+- A movie is updated
+- A movie is deleted
+
+### Benefits
+
+- Faster API responses
+- Reduced MongoDB load
+- Better scalability
+- Production-ready architecture
+
+
 
 # 🚀 Getting Started
 
@@ -262,6 +311,14 @@ docker compose down
 ```
 
 ---
+## Redis Caching
+
+- Integrated Redis for high-speed caching
+- Cached movie listings and movie details
+- Cache invalidation on create/update/delete
+- Designed for scalable production deployments
+
+
 
 # 📚 What I Learned
 
